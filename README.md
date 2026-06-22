@@ -1,37 +1,47 @@
 # Hr-task — Friday Date TV Series Recommender
 
-Scans an Instagram profile, uses **Claude AI** to analyze interests, and recommends a TV series for a Friday date night with streaming availability on Netflix, HBO Max, and Prime Video.
+Scans an Instagram profile, uses Claude AI to analyze interests, and recommends a TV series for a Friday date night with streaming availability on Netflix, HBO Max, and Prime Video.
 
 ## Installation
 
 ```bash
+cd Hr-task
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
 ## Environment Variables
 
-Copy `.env.example` to `.env`:
+```bash
+cp .env.example .env
+```
+
+Edit `.env`:
 
 | Variable | Required | Description |
 |---|---|---|
-| `ANTHROPIC_API_KEY` | Recommended | Claude API key for intelligent analysis |
-| `RAPIDAPI_KEY` | Optional | Live Instagram scraping via RapidAPI |
+| `ANTHROPIC_API_KEY` | Yes | Get from console.anthropic.com |
+| `RAPIDAPI_KEY` | Optional | Enables live Instagram scraping |
 | `CLAUDE_MODEL` | Optional | Defaults to `claude-haiku-4-5` |
 
 ## Usage
 
 ```bash
-# With Claude API (recommended)
-python -m src.cli <username>
+# Activate venv first
+source .venv/bin/activate
 
-# With exported JSON profile
-python -m src.cli <username> --json profile.json
+# Run with Instagram username (no @)
+python -m src.cli username
 
-# Adjust number of results
-python -m src.cli <username> --top 3
+# Run with exported JSON profile (no API keys needed)
+python -m src.cli username --json profile.json
+
+# Change number of results
+python -m src.cli username --top 3
 ```
 
-## JSON Fallback Format
+## JSON Profile Format (fallback mode)
 
 ```json
 {
@@ -46,7 +56,7 @@ python -m src.cli <username> --top 3
 
 ```
 Analyzing profile with Claude...
-Claude summary: A mystery-loving traveler with a taste for dark aesthetics
+Claude summary: A mystery-loving traveler with a dark aesthetic
 Detected interests: mystery, travel, photography
 Getting Claude recommendations...
 
@@ -54,7 +64,7 @@ Recommended Series for @example_user:
 
 1. Dark
    Match Score: 91%
-   Reason: Her love of mystery and travel perfectly matches this mind-bending German thriller
+   Reason: Her love of mystery and travel perfectly matches this mind-bending thriller
    Genres: mystery, sci-fi, thriller
    Available: Netflix
 
@@ -63,16 +73,6 @@ Recommended Series for @example_user:
    Reason: Emotional depth and stunning landscapes appeal to her adventurous side
    Genres: drama, action, sci-fi
    Available: HBO Max
-```
-
-## Architecture
-
-```
-cli.py
-  ├── InstagramService   — fetch/parse profile, keyword interest extraction
-  ├── ClaudeService      — AI interest analysis + series recommendations
-  ├── RecommendationService — orchestrates Claude + static fallback scoring
-  └── StreamingService   — availability check (API or static catalog)
 ```
 
 ## Run Tests
