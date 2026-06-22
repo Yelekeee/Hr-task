@@ -11,22 +11,23 @@ from src.config import Config
 
 
 INTEREST_KEYWORDS: dict[str, list[str]] = {
-    "travel": ["travel", "wanderlust", "explore", "adventure", "trip", "journey", "vacation", "world"],
-    "food": ["food", "foodie", "cooking", "recipe", "eat", "cuisine", "chef", "baking", "coffee"],
-    "fitness": ["fitness", "gym", "workout", "health", "yoga", "running", "sport", "training", "crossfit"],
-    "photography": ["photography", "photo", "camera", "portrait", "landscape", "shots", "photographer"],
-    "music": ["music", "concert", "band", "playlist", "guitar", "dj", "singer", "song", "artist"],
-    "art": ["art", "design", "illustration", "drawing", "painting", "creative", "artist", "sketch"],
+    "travel": ["travel", "wanderlust", "explore", "adventure", "trip", "journey", "vacation", "world", "путешествия", "путешествие"],
+    "food": ["food", "foodie", "cooking", "recipe", "eat", "cuisine", "chef", "baking", "coffee", "еда", "кофе"],
+    "fitness": ["fitness", "gym", "workout", "health", "yoga", "running", "sport", "training", "спорт", "фитнес"],
+    "photography": ["photography", "photo", "camera", "portrait", "landscape", "shots", "photographer", "фото"],
+    "music": ["music", "concert", "band", "playlist", "guitar", "dj", "singer", "song", "музыка"],
+    "art": ["art", "design", "illustration", "drawing", "painting", "creative", "artist", "sketch", "искусство"],
     "tech": ["tech", "coding", "developer", "software", "startup", "ai", "data", "engineering"],
-    "fashion": ["fashion", "style", "outfit", "clothes", "ootd", "designer", "streetwear"],
-    "nature": ["nature", "hiking", "outdoors", "mountains", "forest", "beach", "wildlife"],
-    "mystery": ["mystery", "thriller", "crime", "detective", "dark", "horror", "suspense"],
-    "science": ["science", "space", "astronomy", "physics", "biology", "research"],
-    "history": ["history", "culture", "heritage", "museum", "ancient", "historical"],
-    "comedy": ["comedy", "funny", "humor", "meme", "laugh", "jokes", "fun"],
-    "drama": ["drama", "emotional", "heartfelt", "story", "narrative"],
-    "fantasy": ["fantasy", "magic", "supernatural", "mythical", "dragon", "wizard"],
-    "anime": ["anime", "manga", "otaku", "cosplay", "japanese"],
+    "fashion": ["fashion", "style", "outfit", "clothes", "ootd", "designer", "streetwear", "мода", "стиль"],
+    "nature": ["nature", "hiking", "outdoors", "mountains", "forest", "beach", "wildlife", "природа", "горы"],
+    "mystery": ["mystery", "thriller", "crime", "detective", "dark", "horror", "suspense", "детектив", "триллер"],
+    "science": ["science", "space", "astronomy", "physics", "biology", "research", "наука"],
+    "history": ["history", "culture", "heritage", "museum", "ancient", "historical", "история"],
+    "comedy": ["comedy", "funny", "humor", "meme", "laugh", "jokes", "fun", "юмор"],
+    "drama": ["drama", "emotional", "heartfelt", "story", "narrative", "драма"],
+    "fantasy": ["fantasy", "magic", "supernatural", "mythical", "dragon", "wizard", "фэнтези"],
+    "anime": ["anime", "manga", "otaku", "cosplay", "japanese", "аниме"],
+    "romance": ["romance", "love", "romantic", "любовь", "романтика"],
 }
 
 
@@ -118,7 +119,6 @@ class InstagramService:
             return None
 
     def build_mock_profile(self, username: str) -> InstagramProfile:
-        """Fallback: build minimal profile from username heuristics."""
         interests = extract_interests(username)
         return InstagramProfile(
             username=username,

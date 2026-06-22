@@ -11,6 +11,7 @@ class InstagramProfile:
     interests: List[str] = field(default_factory=list)
     follower_count: int = 0
     following_count: int = 0
+    claude_data: dict = field(default_factory=dict)  # enriched by Claude API
 
 
 @dataclass
